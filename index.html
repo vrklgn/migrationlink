@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+<style>
+body {
+  font-family: "Arial", sans-serif;
+  text-align: center;
+  font-size: 16px;
+  background-color: #FFF;
+  color: #000;
+}
+
+input {
+letter-spacing: normal;
+  word-spacing: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  display: inline-block;
+  appearance: auto;
+  text-align: center;
+  background-color: rgb(255, 255, 255);
+  border-radius: 5px;
+  padding: 10px;
+  border: 1px solid rgb(102, 84, 84);
+  color: rgb(73, 73, 73);
+  width: 50%;
+  margin: 10px;
+}
+
+.button {
+font-size: 1rem;
+    line-height: 1.25rem;
+    min-height: 52px;
+    padding: 1rem 2rem;
+    background: #4CAF50;
+    border: none;
+    color: #FFF;
+    appearance: none;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 2rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+</style>
+  </head>
+  <body>
+    <h1>Google Migration Link Converter</h1>
+    <p>Got an old link that is currently not working or you don't have access to? <br>
+      Input your link here and it will return the new location and owner of the document.</p>
+
+
+  <input type="text" id="link" name="link">
+  <br/>
+  <button id="submitsearch" class= "button" value="Search"/>Search</button>
+
+  <hr/>
+
+  <p id="p1"></p>
+  <p id="p2"></p>
+
+
+  </body>
+  <script>
+  document.getElementById('submitsearch').addEventListener('click', function() {
+    // Get the value from the `phoneInput` text box.
+    var linktext = document.getElementById('link').value;
+    
+    // Run the Apps Script `userClicked` function passing the `phoneNumber` input.
+    var result = google.script.run.withSuccessHandler(updateText).userClicked(linktext);
+    
+    function updateText(results){
+    document.getElementById('p2').innerHTML = "<a href="+results[0]+">Link to your document</a>" ;
+    document.getElementById('p1').innerHTML = "<b>Owner </b>"+ results[1];
+    }
+    
+  });
+  </script>
+</html>
